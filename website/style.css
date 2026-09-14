@@ -1,0 +1,570 @@
+/* ═══════════════════════════════════════════════════════════════
+   CODESTORM — NETFLIX CONTENT ANALYTICS
+   Official Netflix Red & White Theme Design System
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── CSS Custom Properties (Netflix Theme) ─── */
+:root {
+    /* Netflix Dark Canvas */
+    --bg: #141414;
+    --bg-card: #1f1f1f;
+    --bg-card-hover: #262626;
+    
+    /* Netflix Brand Colors */
+    --netflix-red: #e50914;
+    --netflix-red-hover: #f40612;
+    --netflix-red-glow: rgba(229, 9, 20, 0.35);
+    
+    /* Text Colors */
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --text-muted: #757575;
+    
+    /* Borders & Glass */
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --border-red: rgba(229, 9, 20, 0.4);
+    
+    /* Typography */
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    
+    /* Spacing & Radii */
+    --section-gap: 4.5rem;
+    --card-radius: 16px;
+    --card-padding: 2rem;
+    
+    /* Transitions */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Global Reset ─── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ─── Custom Scrollbar ─── */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+    background: var(--netflix-red);
+    border-radius: 10px;
+    border: 2px solid var(--bg);
+}
+
+/* ─── Ambient Red Glow Background ─── */
+.ambient-background {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.22;
+    animation: floatGlow 20s infinite ease-in-out alternate;
+}
+
+.glow-1 {
+    top: -15%; left: 15%;
+    width: 650px; height: 650px;
+    background: radial-gradient(circle, var(--netflix-red), #b20710);
+    animation-delay: 0s;
+}
+
+.glow-2 {
+    bottom: -15%; right: 10%;
+    width: 550px; height: 550px;
+    background: radial-gradient(circle, #ff4d4d, var(--netflix-red));
+    animation-delay: -8s;
+}
+
+@keyframes floatGlow {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(50px, 40px) scale(1.1); }
+    100% { transform: translate(-30px, 60px) scale(0.95); }
+}
+
+/* ─── Floating Bubble Particles ─── */
+.particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 0 0 14px var(--netflix-red-glow);
+    animation: floatBubble linear infinite;
+}
+
+@keyframes floatBubble {
+    0% {
+        transform: translateY(105vh) scale(0.5) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.55;
+    }
+    90% {
+        opacity: 0.55;
+    }
+    100% {
+        transform: translateY(-10vh) scale(1.3) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ─── Navigation ─── */
+.navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(20, 20, 20, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-subtle);
+    transition: var(--transition);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+}
+
+.nav-title {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-link {
+    padding: 0.5rem 1.2rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ─── Main Layout ─── */
+.dashboard-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 6.5rem 2rem 4rem 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* ─── Glass Cards ─── */
+.glass-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--card-radius);
+    transition: var(--transition);
+}
+
+.glass-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-red);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 15px var(--netflix-red-glow);
+}
+
+/* ─── Hero Section ─── */
+.hero {
+    text-align: center;
+    padding: 4rem 1rem 4.5rem 1rem;
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: 4.2rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+    letter-spacing: -1.5px;
+}
+
+.gradient-text {
+    color: var(--text-primary);
+}
+
+.text-red {
+    color: var(--netflix-red);
+    text-shadow: 0 0 20px var(--netflix-red-glow);
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 680px;
+    margin: 0 auto 2.5rem auto;
+    font-weight: 400;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+}
+
+.btn {
+    padding: 0.95rem 2.2rem;
+    border-radius: 8px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--netflix-red);
+    color: white;
+    box-shadow: 0 4px 20px var(--netflix-red-glow);
+}
+
+.btn-primary:hover {
+    background: var(--netflix-red-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(229, 9, 20, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: white;
+}
+
+/* ─── Metrics Section ─── */
+.metrics-section {
+    margin-bottom: var(--section-gap);
+}
+
+.section-label {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--netflix-red);
+    margin-bottom: 1.5rem;
+}
+
+.metrics-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1.5rem;
+}
+
+.metric-card {
+    padding: 1.8rem 1.2rem;
+    text-align: center;
+}
+
+.metric-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.metric-value {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.metric-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 0.3rem;
+    font-weight: 500;
+}
+
+.metric-pct {
+    color: var(--netflix-red);
+    font-weight: 700;
+}
+
+/* ─── Question Sections ─── */
+.question-section {
+    margin-bottom: var(--section-gap);
+}
+
+.question-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.question-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px; height: 52px;
+    border-radius: 12px;
+    background: var(--netflix-red);
+    color: white;
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 15px var(--netflix-red-glow);
+    flex-shrink: 0;
+}
+
+.question-text h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--text-primary);
+}
+
+.question-full {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-top: 0.2rem;
+}
+
+/* ─── Insight Card ─── */
+.insight-card {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.8rem 2rem;
+    margin-bottom: 2rem;
+    align-items: flex-start;
+}
+
+.insight-icon {
+    font-size: 2.2rem;
+    line-height: 1;
+}
+
+.insight-body h3 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--netflix-red);
+    margin-bottom: 0.4rem;
+}
+
+.insight-body p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.insight-body strong {
+    color: var(--text-primary);
+}
+
+/* ─── Charts Grid ─── */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 900px) {
+    .charts-grid { grid-template-columns: 1fr; }
+}
+
+.chart-card {
+    padding: 1.8rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chart-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+.chart-container {
+    width: 100%;
+    min-height: 400px;
+}
+
+/* ─── Stats Strip ─── */
+.stats-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1.2rem 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-num {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--netflix-red);
+}
+
+.stat-desc {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 30px;
+    background: var(--border-subtle);
+}
+
+/* ─── Tech Grid ─── */
+.tech-section {
+    margin-bottom: var(--section-gap);
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1.5rem;
+}
+
+.tech-card {
+    padding: 1.8rem 1.2rem;
+    text-align: center;
+}
+
+.tech-icon {
+    font-size: 2.2rem;
+    margin-bottom: 0.6rem;
+}
+
+.tech-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: var(--text-primary);
+}
+
+.tech-card p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* ─── Summary Section ─── */
+.summary-section {
+    padding: var(--card-padding);
+    margin-bottom: 3rem;
+}
+
+.summary-section h2 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--netflix-red);
+}
+
+.summary-section p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.summary-section strong {
+    color: var(--text-primary);
+}
+
+.summary-section p:last-child {
+    margin-bottom: 0;
+}
+
+/* ─── Animations ─── */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+
+/* ─── Responsive Media Queries ─── */
+@media (max-width: 768px) {
+    .navbar { padding: 0.8rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero-title { font-size: 2.8rem; }
+    .dashboard-container { padding: 5rem 1rem 3rem 1rem; }
+    .stat-divider { display: none; }
+    .stats-strip { flex-direction: column; align-items: stretch; text-align: center; }
+}

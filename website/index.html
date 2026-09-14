@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeStorm — Netflix Content Analytics</title>
+    <meta name="description" content="Interactive data visualization dashboard exploring Netflix's 8,807 titles across Movies and TV Shows. Created by Team CodeStorm.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Ambient Red Glow Background -->
+    <div class="ambient-background">
+        <div class="glow-orb glow-1"></div>
+        <div class="glow-orb glow-2"></div>
+    </div>
+
+    <!-- Floating Bubble Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">
+            <span class="nav-title">CodeStorm Analytics</span>
+        </div>
+        <div class="nav-links">
+            <a href="#overview" class="nav-link">Overview</a>
+            <a href="#q1" class="nav-link">Q1</a>
+            <a href="#q2" class="nav-link">Q2</a>
+            <a href="#q3" class="nav-link">Q3</a>
+            <a href="#insights" class="nav-link">Insights</a>
+        </div>
+    </nav>
+
+    <main class="dashboard-container">
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <h1 class="hero-title fade-in-up delay-1">
+                <span class="gradient-text">Netflix Content</span>
+                <br>
+                <span class="text-red">Analytics</span>
+            </h1>
+            <p class="hero-subtitle fade-in-up delay-2">Exploring <strong>8,807 titles</strong> across Movies & TV Shows — uncovering Netflix's global content strategy by <strong>Team CodeStorm</strong>.</p>
+            <div class="hero-cta fade-in-up delay-3">
+                <a href="#overview" class="btn btn-primary">Explore Dashboard</a>
+                <a href="#q1" class="btn btn-secondary">Research Questions</a>
+            </div>
+        </section>
+
+        <!-- Key Metrics -->
+        <section class="metrics-section" id="overview">
+            <h2 class="section-label fade-in-up">Dataset Overview</h2>
+            <div class="metrics-row">
+                <div class="metric-card glass-card fade-in-up" style="--delay: 0">
+                    <div class="metric-icon">🎬</div>
+                    <div class="metric-value counter" data-target="8807">0</div>
+                    <div class="metric-label">Total Titles</div>
+                </div>
+                <div class="metric-card glass-card fade-in-up" style="--delay: 1">
+                    <div class="metric-icon">🎥</div>
+                    <div class="metric-value counter" data-target="6131">0</div>
+                    <div class="metric-label">Movies <span class="metric-pct">(69.6%)</span></div>
+                </div>
+                <div class="metric-card glass-card fade-in-up" style="--delay: 2">
+                    <div class="metric-icon">📺</div>
+                    <div class="metric-value counter" data-target="2676">0</div>
+                    <div class="metric-label">TV Shows <span class="metric-pct">(30.4%)</span></div>
+                </div>
+                <div class="metric-card glass-card fade-in-up" style="--delay: 3">
+                    <div class="metric-icon">🌍</div>
+                    <div class="metric-value counter" data-target="748">0</div>
+                    <div class="metric-label">Country Entries</div>
+                </div>
+                <div class="metric-card glass-card fade-in-up" style="--delay: 4">
+                    <div class="metric-icon">🎭</div>
+                    <div class="metric-value counter" data-target="514">0</div>
+                    <div class="metric-label">Genre Combos</div>
+                </div>
+                <div class="metric-card glass-card fade-in-up" style="--delay: 5">
+                    <div class="metric-icon">📅</div>
+                    <div class="metric-value">1925–2021</div>
+                    <div class="metric-label">Year Range</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 1 -->
+        <section class="question-section" id="q1">
+            <div class="question-header fade-in-up">
+                <span class="question-number">01</span>
+                <div class="question-text">
+                    <h2>TV Shows vs Movies: A Decade of Change</h2>
+                    <p class="question-full">How has the proportion of TV Shows vs Movies added to Netflix changed over the last decade?</p>
+                </div>
+            </div>
+
+            <div class="insight-card glass-card fade-in-up">
+                <div class="insight-icon">💡</div>
+                <div class="insight-body">
+                    <h3>Key Finding</h3>
+                    <p>Netflix has <strong>dramatically shifted</strong> its content strategy over the past decade. In 2011, nearly <strong>100% of new content was Movies</strong>. By 2021, TV Shows grew to represent about <strong>35% of new additions</strong> — reflecting Netflix's strategic pivot toward original series like <em>Stranger Things</em>, <em>The Crown</em>, and <em>Squid Game</em> that drive sustained subscriber engagement.</p>
+                </div>
+            </div>
+
+            <div class="charts-grid fade-in-up">
+                <div class="chart-card glass-card">
+                    <div class="chart-title">Proportion Shift — Stacked Area Chart</div>
+                    <div class="chart-container" id="q1-area-chart"></div>
+                </div>
+                <div class="chart-card glass-card">
+                    <div class="chart-title">Content Mix — 100% Stacked Bar Chart</div>
+                    <div class="chart-container" id="q1-bar-chart"></div>
+                </div>
+            </div>
+
+            <div class="stats-strip fade-in-up">
+                <div class="stat-item"><span class="stat-num">97%</span><span class="stat-desc">Movies in 2011</span></div>
+                <div class="stat-divider"></div>
+                <div class="stat-item"><span class="stat-num">65%</span><span class="stat-desc">Movies in 2021</span></div>
+                <div class="stat-divider"></div>
+                <div class="stat-item"><span class="stat-num">5x</span><span class="stat-desc">TV Show growth</span></div>
+                <div class="stat-divider"></div>
+                <div class="stat-item"><span class="stat-num">2019</span><span class="stat-desc">Peak additions year</span></div>
+            </div>
+        </section>
+
+        <!-- Question 2 -->
+        <section class="question-section" id="q2">
+            <div class="question-header fade-in-up">
+                <span class="question-number">02</span>
+                <div class="question-text">
+                    <h2>Global Content Landscape</h2>
+                    <p class="question-full">Which countries are the largest producers of Netflix content?</p>
+                </div>
+            </div>
+
+            <div class="insight-card glass-card fade-in-up">
+                <div class="insight-icon">🌏</div>
+                <div class="insight-body">
+                    <h3>Key Finding</h3>
+                    <p>The <strong>United States dominates</strong> Netflix's library with <strong>2,818 titles</strong> — more than the next 5 countries combined. <strong>India</strong> (972) is the second-largest producer, followed by the <strong>United Kingdom</strong> (419). Netflix's content strategy is increasingly global, with significant investment in content from <strong>Japan, South Korea, Spain</strong>, and emerging markets like <strong>Nigeria</strong> and <strong>Turkey</strong>.</p>
+                </div>
+            </div>
+
+            <div class="charts-grid fade-in-up">
+                <div class="chart-card glass-card">
+                    <div class="chart-title">Top 15 Countries — Horizontal Bar Chart</div>
+                    <div class="chart-container" id="q2-bar-chart"></div>
+                </div>
+                <div class="chart-card glass-card">
+                    <div class="chart-title">Global Spread — World Choropleth Map</div>
+                    <div class="chart-container" id="q2-map-chart"></div>
+                </div>
+            </div>
+
+            <div class="stats-strip fade-in-up">
+                <div class="stat-item"><span class="stat-num">2,818</span><span class="stat-desc">US titles (36%)</span></div>
+                <div class="stat-divider"></div>
+                <div class="stat-item"><span class="stat-num">972</span><span class="stat-desc">India titles</span></div>
+                <div class="stat-divider"></div>
+                <div class="stat-item"><span class="stat-num">100+</span><span class="stat-desc">Countries represented</span></div>
+                <div class="stat-divider"></div>
+                <div class="stat-item"><span class="stat-num">50%</span><span class="stat-desc">From top 3 countries</span></div>
+            </div>
+        </section>
+
+        <!-- Question 3 -->
+        <section class="question-section" id="q3">
+            <div class="question-header fade-in-up">
+                <span class="question-number">03</span>
+                <div class="question-text">
+                    <h2>Genre DNA of Netflix</h2>
+                    <p class="question-full">What are the most common genre combinations?</p>
+                </div>
+            </div>
+
+            <div class="insight-card glass-card fade-in-up">
+                <div class="insight-icon">🎭</div>
+                <div class="insight-body">
+                    <h3>Key Finding</h3>
+                    <p>The most prevalent genre combination is <strong>"International Movies, Dramas"</strong> with 362 titles. The word <strong>"International"</strong> appears in 6 of the top 10 genre tags, highlighting Netflix's global content DNA. <strong>Standalone categories</strong> like Documentaries (299) and Stand-Up Comedy (273) also have strong presence. Netflix uses <strong>514 unique genre combinations</strong> across ~42 base genres to fuel its recommendation engine.</p>
+                </div>
+            </div>
+
+            <div class="charts-grid fade-in-up">
+                <div class="chart-card glass-card">
+                    <div class="chart-title">Top 15 Genre Combinations</div>
+                    <div class="chart-container" id="q3-bar-chart"></div>
+                </div>
+                <div class="chart-card glass-card">
+                    <div class="chart-title">Genre Co-occurrence Heatmap</div>
+                    <div class="chart-container" id="q3-heatmap"></div>
+                </div>
+            </div>
+
+            <div class="stats-strip fade-in-up">
+                <div class="stat-item"><span class="stat-num">362</span><span class="stat-desc">Top combo count</span></div>
+                <div class="stat-divider"></div>
+                <div class="stat-item"><span class="stat-num">42</span><span class="stat-desc">Base genres</span></div>
+                <div class="stat-divider"></div>
+                <div class="stat-item"><span class="stat-num">514</span><span class="stat-desc">Unique combos</span></div>
+                <div class="stat-divider"></div>
+                <div class="stat-item"><span class="stat-num">2.1</span><span class="stat-desc">Avg genres/title</span></div>
+            </div>
+        </section>
+
+        <!-- Additional Insights -->
+        <section class="question-section" id="insights">
+            <div class="question-header fade-in-up">
+                <span class="question-number">+</span>
+                <div class="question-text">
+                    <h2>Additional Insights</h2>
+                    <p class="question-full">Deeper analysis of content ratings and seasonal patterns</p>
+                </div>
+            </div>
+
+            <div class="charts-grid fade-in-up">
+                <div class="chart-card glass-card">
+                    <div class="chart-title">Content Maturity Rating Distribution</div>
+                    <div class="chart-container" id="add-ratings-chart"></div>
+                </div>
+                <div class="chart-card glass-card">
+                    <div class="chart-title">Monthly Addition Patterns (Seasonality)</div>
+                    <div class="chart-container" id="add-monthly-chart"></div>
+                </div>
+            </div>
+
+            <div class="insight-card glass-card fade-in-up" style="margin-top: 2rem;">
+                <div class="insight-icon">📊</div>
+                <div class="insight-body">
+                    <h3>What the Data Tells Us</h3>
+                    <p><strong>TV-MA</strong> (Mature Audiences) is the most common rating with 3,207 titles, indicating Netflix skews toward adult content. <strong>July</strong> sees the highest content additions (723 titles), likely timed for summer viewing. The data reveals Netflix as a platform that has evolved from a US-centric movie streamer into a <strong>global entertainment powerhouse</strong>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="tech-section fade-in-up">
+            <h2 class="section-label">Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">🐍</div>
+                    <h3>Python</h3>
+                    <p>Pandas · NumPy · Data Processing</p>
+                </div>
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">📊</div>
+                    <h3>Matplotlib</h3>
+                    <p>Static Charts · Histograms · Heatmaps</p>
+                </div>
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">🎨</div>
+                    <h3>Seaborn</h3>
+                    <p>Statistical Plots · Styling</p>
+                </div>
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">📈</div>
+                    <h3>Plotly</h3>
+                    <p>Interactive Charts · Maps · 3D</p>
+                </div>
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">🌐</div>
+                    <h3>HTML/CSS/JS</h3>
+                    <p>Netflix Theme Dashboard · Animations</p>
+                </div>
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">📓</div>
+                    <h3>Jupyter</h3>
+                    <p>Notebook · Analysis · Storytelling</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Summary -->
+        <section class="summary-section glass-card fade-in-up">
+            <h2>Project Summary</h2>
+            <p>This project explores the <strong>Netflix Movies and TV Shows</strong> dataset — 8,807 titles spanning content from 1925 to 2021, across 100+ countries and 514 genre combinations. Developed by <strong>Team CodeStorm</strong>, we uncovered Netflix's strategic shift from movies to series, identified global content production patterns, and mapped the genre landscape that powers Netflix's recommendation engine.</p>
+            <p>Built with <strong>Python</strong> (Pandas, Matplotlib, Seaborn, Plotly) for data analysis and <strong>HTML/CSS/JavaScript</strong> with Plotly.js for the interactive web dashboard designed in Netflix Red & White visual style.</p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

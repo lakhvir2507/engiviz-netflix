@@ -1,0 +1,62 @@
+[
+  {
+    "Country": "United States",
+    "Count": 3211
+  },
+  {
+    "Country": "India",
+    "Count": 1008
+  },
+  {
+    "Country": "United Kingdom",
+    "Count": 628
+  },
+  {
+    "Country": "Canada",
+    "Count": 271
+  },
+  {
+    "Country": "Japan",
+    "Count": 259
+  },
+  {
+    "Country": "France",
+    "Count": 212
+  },
+  {
+    "Country": "South Korea",
+    "Count": 211
+  },
+  {
+    "Country": "Spain",
+    "Count": 181
+  },
+  {
+    "Country": "Mexico",
+    "Count": 134
+  },
+  {
+    "Country": "Australia",
+    "Count": 117
+  },
+  {
+    "Country": "Egypt",
+    "Count": 112
+  },
+  {
+    "Country": "Turkey",
+    "Count": 111
+  },
+  {
+    "Country": "Germany",
+    "Count": 103
+  },
+  {
+    "Country": "China",
+    "Count": 100
+  },
+  {
+    "Country": "Nigeria",
+    "Count": 96
+  }
+]
